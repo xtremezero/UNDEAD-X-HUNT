@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/ui/intro/introbg.png" type="Texture" id=1]
 [ext_resource path="res://objects/ui/fonts/Capture it_0.ttf" type="DynamicFontData" id=2]
@@ -10,6 +10,11 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 120
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
 use_filter = true
 font_data = ExtResource( 2 )
 
@@ -116,6 +121,24 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="Label3" type="Label" parent="introbg"]
+anchor_left = 0.751042
+anchor_top = 0.927354
+anchor_right = 0.984958
+anchor_bottom = 0.992897
+margin_right = -196.12
+margin_bottom = -32.0801
+rect_scale = Vector2( 1.77413, 1.77413 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 13
+custom_constants/shadow_offset_y = 9
+custom_fonts/font = SubResource( 7 )
+text = "#FREE_PALESTINE"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="Label2" type="Label" parent="introbg"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -133,9 +156,6 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 2 )
 text = "XtremeZero"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button" type="Button" parent="introbg/Label2"]
 self_modulate = Color( 1, 1, 1, 0 )
