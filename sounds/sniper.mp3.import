@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sniper.mp3-8fe6ec0bafd2ebbcd0aa52ad69ac35bc.mp3str"
+
+[deps]
+
+source_file="res://sounds/sniper.mp3"
+dest_files=[ "res://.import/sniper.mp3-8fe6ec0bafd2ebbcd0aa52ad69ac35bc.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

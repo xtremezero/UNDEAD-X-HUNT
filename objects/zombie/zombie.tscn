@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/zombie_walk_test/zombie.tscn" type="PackedScene" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+export (NodePath) var targetpath
+
+onready var targetorigin = get_node(targetpath).global_transform.origin
+export var speed = 0.2
+export var attack_distance = 0.3
+var alive = true
+func _ready():
+	Global.enemies += 1
+	
+
+func _physics_process(delta):
+	look_at(targetorigin*Vector3(1,0,1)+global_transform.origin*Vector3(0,1,0),Vector3.UP)
+	var distance = ((targetorigin - global_transform.origin)*Vector3(1,0,1)).length()
+	var mv_speed
+	if Global.canplay:
+		mv_speed = speed/8.0
+	else:
+		mv_speed = speed
+	
+	if distance > attack_distance:
+		translate_object_local(Vector3.FORWARD*mv_speed*delta)
+	else:
+		pass
+	
+
+
+"
+
+[node name="zombie" type="Spatial" groups=[
+"zombie",
+]]
+script = SubResource( 1 )
+
+[node name="zombiemesh" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, 0.058813, -0.0310154, -0.0140185 )

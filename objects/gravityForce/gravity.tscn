@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area
+
+var applyforce = false
+var bullet = null
+const force = 0.5
+var forces = 0
+func _ready():
+	pass
+	
+
+func _physics_process(delta):
+	if bullet != null:
+		forces = lerp(forces,force,0.01)
+		bullet.move_and_slide(100*delta*global_transform.basis.x*forces)
+
+
+func _on_gravity_body_entered(body):
+	if body.is_in_group(\"player\"):
+		applyforce = true
+		bullet= body
+
+		
+
+func _on_gravity_body_exited(body):
+	if body.is_in_group(\"player\"):
+		applyforce = false
+		bullet = null
+		forces=0		
+"
+
+[sub_resource type="BoxShape" id=2]
+
+[node name="gravity" type="Area"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.90865, 2.05716, -7.46976 )
+script = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_gravity_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_gravity_body_exited"]

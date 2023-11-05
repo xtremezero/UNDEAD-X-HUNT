@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Explosions.mp3-573a10712928d142536163866081f3de.mp3str"
+
+[deps]
+
+source_file="res://sounds/Explosions.mp3"
+dest_files=[ "res://.import/Explosions.mp3-573a10712928d142536163866081f3de.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

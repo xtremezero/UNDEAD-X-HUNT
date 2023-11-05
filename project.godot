@@ -1,0 +1,62 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="UNDEAD X HUNT"
+run/main_scene="res://Levels/Intro.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
+config/use_custom_user_dir=true
+config/custom_user_dir_name="user://UndeadHunt"
+run/flush_stdout_on_print=true
+run/frame_delay_msec=16
+run/low_processor_mode=true
+boot_splash/image="res://loader/loader.png"
+config/icon="res://icon.png"
+config/quit_on_go_back=false
+
+[autoload]
+
+Global="*res://global.gd"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/borderless=true
+window/size/fullscreen=true
+window/energy_saving/keep_screen_on=false
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[input]
+
+ui_select={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":3,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_clear_color=Color( 0.129412, 0.129412, 0.129412, 1 )
+quality/filters/use_fxaa=true
+environment/default_environment="res://default_env.tres"

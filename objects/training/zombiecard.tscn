@@ -1,0 +1,125 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://objects/training/zombie.PNG" type="Texture" id=1]
+[ext_resource path="res://sounds/impactMining_002.ogg" type="AudioStream" id=2]
+[ext_resource path="res://sounds/impactMining_003.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sounds/impactMining_001.ogg" type="AudioStream" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Spatial
+
+export (NodePath) var targetpath
+
+var targetorigin
+export var speed = 0.2
+export var attack_distance = 0.6
+
+func _ready():
+	
+	Global.enemies += 1
+	if targetpath:
+		targetorigin = get_node(targetpath).global_transform.origin
+
+func _physics_process(delta):
+	if targetpath :
+		look_at(targetorigin*Vector3(1,0,1)+global_transform.origin*Vector3(0,1,0),Vector3.UP)
+		var distance = ((targetorigin - global_transform.origin)*Vector3(1,0,1)).length()
+		var mv_speed
+		if Global.canplay:
+			mv_speed = speed/8.0
+		else:
+			mv_speed = speed
+	
+		if distance > attack_distance:
+			translate_object_local(Vector3.FORWARD*mv_speed*delta)
+	else:
+		pass
+	
+
+
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Sprite3D
+
+var alive = true
+var spins = 18
+func _process(delta):
+	if !alive:
+		if spins > 0:
+			spins-=1
+			rotation_degrees.x+= 5
+		else:
+			pass
+			
+			
+
+func _on_body_body_entered(body):
+	if body.is_in_group(\"player\"):
+		Global.killzombie()
+		$sound.get_child(randi()%$sound.get_child_count()).play()
+		alive = false
+		$body.queue_free()
+
+
+func _on_body_area_entered(area):
+	if area.is_in_group(\"explosion\"):
+		if alive:
+			Global.killzombie()
+			$sound.get_child(randi()%$sound.get_child_count()).play()
+			alive = false
+			$body.queue_free()
+
+"
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.373626, 0.702876, 0.0156472 )
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.0696066, 0.0942516, 0.0156472 )
+
+[node name="zombiecard" type="Spatial" groups=[
+"zombie",
+]]
+script = SubResource( 1 )
+speed = 0.0
+
+[node name="card" type="Sprite3D" parent="."]
+transform = Transform( -1.02907e-08, 0, -0.235424, 0, 0.235424, 0, 0.235424, 0, -1.02907e-08, 0, 0.00634024, 0 )
+offset = Vector2( 0, 210 )
+texture = ExtResource( 1 )
+script = SubResource( 2 )
+
+[node name="body" type="Area" parent="card"]
+transform = Transform( 2.72258, 0, 0, 0, 2.72258, 0, 0, 0, 2.72258, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="card/body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.030637, 0.736026, 0 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="card/body"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0256014, 1.55098, 0 )
+shape = SubResource( 4 )
+
+[node name="sound" type="Node" parent="card"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer3D" parent="card/sound"]
+stream = ExtResource( 4 )
+unit_db = 80.0
+unit_size = 100.0
+max_db = 6.0
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer3D" parent="card/sound"]
+stream = ExtResource( 2 )
+unit_db = 80.0
+unit_size = 100.0
+max_db = 6.0
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer3D" parent="card/sound"]
+stream = ExtResource( 3 )
+unit_db = 80.0
+unit_size = 100.0
+max_db = 6.0
+
+[connection signal="area_entered" from="card/body" to="card" method="_on_body_area_entered"]
+[connection signal="body_entered" from="card/body" to="card" method="_on_body_body_entered"]

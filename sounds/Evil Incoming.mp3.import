@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Evil Incoming.mp3-b0081b16427c2faeaff9bfdd39ff6812.mp3str"
+
+[deps]
+
+source_file="res://sounds/Evil Incoming.mp3"
+dest_files=[ "res://.import/Evil Incoming.mp3-b0081b16427c2faeaff9bfdd39ff6812.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

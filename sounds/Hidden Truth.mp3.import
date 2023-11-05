@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Hidden Truth.mp3-0737f17332906fbff58beae6d0aae90c.mp3str"
+
+[deps]
+
+source_file="res://sounds/Hidden Truth.mp3"
+dest_files=[ "res://.import/Hidden Truth.mp3-0737f17332906fbff58beae6d0aae90c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/factorymate.mp3-9c76bad47e4be2c73d9ab5425c817bca.mp3str"
+
+[deps]
+
+source_file="res://sounds/factorymate.mp3"
+dest_files=[ "res://.import/factorymate.mp3-9c76bad47e4be2c73d9ab5425c817bca.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

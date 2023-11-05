@@ -1,0 +1,230 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://MotionTrail/MotionTrail.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/bullet_set/bullet.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://sounds/windsound.mp3" type="AudioStream" id=3]
+[ext_resource path="res://objects/bullet_set/textures/LowpolyBullet_initialShadingGroup_baseColor.jpg" type="Texture" id=4]
+[ext_resource path="res://objects/ui/fonts/abeatbyKaiRegular.otf" type="DynamicFontData" id=5]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends KinematicBody
+
+
+var slowGague = 3
+onready var slowMax = slowGague
+var Speed = 1.5;
+var speedMultiplier = 1
+var controlForce = Vector2.ZERO
+var angle = 0.2
+
+func _ready():
+	$Camera.current = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$CanvasLayer/Gague.value = slowGague
+	$CanvasLayer/Gague.max_value = slowMax 
+
+	Global.connect(\"gameover\",self,\"endround\")
+
+func _physics_process(delta):
+	rotation.z = lerp(rotation.z,0,0.1)
+	move_and_slide(global_transform.basis.z*Speed*speedMultiplier)
+	
+	
+	$AudioStreamPlayer.pitch_scale = speedMultiplier
+	if Global.canplay:
+		var rotatemultiplier = 1-(0.2*speedMultiplier)-(0.5*(1-speedMultiplier))
+		rotate_object_local(Vector3.RIGHT,controlForce.y*delta*angle*rotatemultiplier)
+		rotate_object_local(Vector3.UP,-controlForce.x*delta*angle*rotatemultiplier )
+	controlForce = controlForce.linear_interpolate(Vector2.ZERO,0.1)
+	
+	controlForce = 0.5*Vector2(Input.get_action_strength(\"ui_right\")-Input.get_action_strength(\"ui_left\"),Input.get_action_strength(\"ui_up\")-Input.get_action_strength(\"ui_down\"))/(speedMultiplier*speedMultiplier)
+	
+	if Input.is_action_pressed(\"ui_select\") and slowGague>0:
+		if Global.canplay:
+			speedMultiplier = lerp(speedMultiplier,0.25,0.2)
+			if controlForce.length_squared() > 0 :
+				slowGague-=delta
+				updateGagueUI()
+			else:
+				slowGague-=delta/3
+				updateGagueUI()
+	else:
+		speedMultiplier = lerp(speedMultiplier,1,0.2)
+		
+
+func updateGagueUI():
+	$CanvasLayer/Gague.value = slowGague
+
+func _on_hitbox_body_entered(body):
+	queue_free()
+	Global.emit_signal(\"gameover\")
+
+
+func _on_hitbox_body_exited(body):
+	queue_free()
+	Global.emit_signal(\"gameover\")
+
+
+func endround():
+	queue_free()
+	Global.guncam.global_transform = $Camera.global_transform
+	Global.guncam.fov = $Camera.fov 
+	
+"
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Camera
+
+
+onready var target = get_parent().get_node(\"CamPos\")
+onready var fovInit= fov
+var introfov  = 0.25
+func _ready():
+	set_as_toplevel(true)
+	Global.gamecam = self
+func _physics_process(delta):
+	global_transform=global_transform.interpolate_with(target.global_transform,0.05)
+	fov = (fovInit - (50*get_parent().speedMultiplier-50))*introfov
+	introfov = lerp(introfov,1,0.01)
+	
+"
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 0.0257998
+height = 0.103485
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 0.03, 0.03, 0.162302 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 1, 0.733333, 0, 1 )
+border_width_top = 3
+border_width_bottom = 3
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 120
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_vertex_lighting = true
+albedo_color = Color( 3, 1.63477, 0, 1 )
+albedo_texture = ExtResource( 4 )
+metallic_specular = 1.0
+roughness = 0.0
+
+[sub_resource type="SpatialMaterial" id=8]
+params_billboard_mode = 1
+albedo_color = Color( 0.619608, 0.411765, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.666667, 0, 1 )
+emission_energy = 3.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="Curve" id=9]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.3 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+gravity = Vector3( 0, 0, 0 )
+scale_curve = SubResource( 10 )
+
+[sub_resource type="QuadMesh" id=12]
+size = Vector2( 0.015, 0.015 )
+
+[node name="bullet" type="KinematicBody" groups=[
+"player",
+]]
+collision_mask = 0
+script = SubResource( 1 )
+
+[node name="Camera" type="ClippedCamera" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.206309, -1 )
+fov = 90.0
+script = SubResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.622436, 0, 0, 0, 0.622436, 0, 0, 0, 1.57096, 0, 0, 0.0195407 )
+shape = SubResource( 3 )
+
+[node name="CamPos" type="Spatial" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.206309, -1 )
+
+[node name="hitbox" type="Area" parent="." groups=[
+"player",
+]]
+collision_mask = 512
+
+[node name="CollisionShape" type="CollisionShape" parent="hitbox"]
+transform = Transform( 0.622866, 0, 0, 0, 0.622866, 0, 0, 0, 0.896761, 0, 0, 0.0231369 )
+shape = SubResource( 4 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Gague" type="ProgressBar" parent="CanvasLayer"]
+anchor_left = 0.957292
+anchor_top = 0.0148148
+anchor_right = 0.947917
+anchor_bottom = 0.0435185
+margin_top = 667.0
+margin_right = 650.999
+margin_bottom = 683.0
+rect_rotation = -89.9999
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+value = 30.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Gague"]
+margin_left = -3.42883
+margin_top = -63.52
+margin_right = 926.571
+margin_bottom = 82.48
+rect_scale = Vector2( 0.419571, 0.419571 )
+custom_fonts/font = SubResource( 13 )
+text = "Time Freeze"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bullet" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0296169 )
+material_override = SubResource( 7 )
+mesh = ExtResource( 2 )
+material/0 = null
+
+[node name="MotionTrail" parent="." instance=ExtResource( 1 )]
+fromWidth = 0.02
+toWidth = 0.01
+lifespan = 10.0
+startColor = Color( 4, 1.5, 0.5, 1 )
+endColor = Color( 3, 1, 0, 0 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = 24.0
+autoplay = true
+
+[node name="Particles" type="Particles" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0899775 )
+material_override = SubResource( 8 )
+amount = 24
+lifetime = 2.0
+fixed_fps = 15
+local_coords = false
+process_material = SubResource( 11 )
+draw_pass_1 = SubResource( 12 )
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="hitbox" to="." method="_on_hitbox_body_exited"]

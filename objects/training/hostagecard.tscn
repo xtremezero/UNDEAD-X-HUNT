@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/training/hostage.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Area
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+func _on_target_body_entered(body):
+	if body.is_in_group(\"player\"):
+		queue_free()
+		print('ops')
+		Global.endround()
+
+func _on_hostage_area_entered(area):
+	if area.is_in_group(\"zombie\") or area.is_in_group(\"explosion\"):
+		queue_free()
+		Global.endround()
+"
+
+[sub_resource type="CylinderShape" id=2]
+radius = 0.23
+height = 1.0
+
+[node name="hostage" type="Area"]
+script = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 0.713563, 0, 0, 0, 0.78198, 0, 0, 0, 0.183048, -0.0296466, 0.432839, 0 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="."]
+transform = Transform( 0.336096, 0, 0, 0, 0.36832, 0, 0, 0, 0.103555, -0.0387051, 0.825719, 0 )
+shape = SubResource( 2 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 0.235454, 0, 0, 0, 0.235454, 0, 0, 0, 0.235454, -0.0235548, 0.48257, 0 )
+alpha_cut = 2
+texture = ExtResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_hostage_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_target_body_entered"]

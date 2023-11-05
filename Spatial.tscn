@@ -1,0 +1,104 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://objects/sniper/gun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/bomb/bomb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/garage/garage.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/gravityForce/gravity.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/introcamera/CameraLevel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/reflector/reflector.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/pickups/pickups.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/zombie/zombie.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/hostage/hostage.tscn" type="PackedScene" id=14]
+
+[sub_resource type="Environment" id=1]
+ambient_light_color = Color( 0.47451, 0.2, 0.2, 1 )
+fog_enabled = true
+fog_color = Color( 0.215686, 0, 0, 1 )
+fog_sun_color = Color( 0, 0, 0, 1 )
+fog_depth_begin = 4.5
+fog_depth_end = 76.6
+fog_depth_curve = 0.267944
+tonemap_mode = 3
+tonemap_exposure = 1.15
+ssao_enabled = true
+ssao_radius2 = 0.39
+ssao_light_affect = 1.0
+ssao_ao_channel_affect = 1.0
+ssao_quality = 0
+ssao_edge_sharpness = 16.0
+dof_blur_far_enabled = true
+dof_blur_far_distance = 7.5
+dof_blur_far_transition = 10.0
+dof_blur_far_amount = 0.08
+dof_blur_far_quality = 0
+glow_enabled = true
+glow_levels/1 = true
+glow_levels/2 = true
+glow_strength = 0.92
+glow_blend_mode = 0
+glow_bicubic_upscale = true
+
+[node name="level" type="Spatial"]
+
+[node name="gun" parent="." instance=ExtResource( 1 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.19921, 1.36978, -1.10787 )
+closestzombie = NodePath("../zombie")
+hostage = NodePath("../hostage")
+
+[node name="skulls" parent="gun/CanvasLayer/enemies/targets" index="0"]
+frame = 5
+
+[node name="skulls2" parent="gun/CanvasLayer/enemies/targets" index="1"]
+frame = 4
+
+[node name="skulls3" parent="gun/CanvasLayer/enemies/targets" index="2"]
+frame = 4
+
+[node name="skulls4" parent="gun/CanvasLayer/enemies/targets" index="3"]
+frame = 3
+
+[node name="skulls5" parent="gun/CanvasLayer/enemies/targets" index="4"]
+frame = 2
+
+[node name="skulls6" parent="gun/CanvasLayer/enemies/targets" index="5"]
+frame = 2
+
+[node name="zombie" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00072217, 2.38419e-07, -2.68886 )
+targetpath = NodePath("../hostage")
+
+[node name="bomb" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.7017, -0.00629911, 2.55686 )
+
+[node name="bomb2" parent="." instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2.22959, -0.00629911, 2.55686 )
+
+[node name="bomb3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.0769974, 0, -0.997031, 0, 1, 0, 0.997031, 0, 0.0769974, -2.65106, 0.629791, 2.58537 )
+
+[node name="bomb4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.0769974, 0, -0.997031, 0, 1, 0, 0.997031, 0, 0.0769974, -2.22831, 0.629791, 2.53519 )
+
+[node name="hostage" parent="." instance=ExtResource( 14 )]
+
+[node name="pickups" parent="." instance=ExtResource( 7 )]
+
+[node name="gravity" parent="." instance=ExtResource( 4 )]
+
+[node name="reflector" parent="." instance=ExtResource( 6 )]
+transform = Transform( 0.286081, 0, 0, 0, -1.2505e-08, 0.286081, 0, -0.418559, -1.82958e-08, -4.234, 1.05419, 3.47119 )
+
+[node name="garage" parent="." instance=ExtResource( 3 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="WorldEnvironment"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.0482, 2.53577, -4.35477 )
+light_color = Color( 0.705882, 0.196078, 0.196078, 1 )
+shadow_enabled = true
+
+[node name="CameraLevel" parent="." instance=ExtResource( 5 )]
+
+[editable path="gun"]
+[editable path="CameraLevel"]

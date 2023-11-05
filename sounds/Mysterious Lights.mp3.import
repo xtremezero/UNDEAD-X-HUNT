@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Mysterious Lights.mp3-ad289f45915c0c44fec495c1e8a48654.mp3str"
+
+[deps]
+
+source_file="res://sounds/Mysterious Lights.mp3"
+dest_files=[ "res://.import/Mysterious Lights.mp3-ad289f45915c0c44fec495c1e8a48654.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

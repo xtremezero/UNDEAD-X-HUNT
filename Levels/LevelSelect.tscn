@@ -1,0 +1,492 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://objects/ui/selectstage/locked.png" type="Texture" id=1]
+[ext_resource path="res://objects/ui/selectstage/completed.png" type="Texture" id=2]
+[ext_resource path="res://objects/ui/selectstage/current.png" type="Texture" id=3]
+[ext_resource path="res://objects/ui/fonts/Capture it 2_0.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://objects/ui/fonts/Capture it_0.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://objects/ui/selectstage/map3.png" type="Texture" id=6]
+[ext_resource path="res://objects/ui/selectstage/map2.png" type="Texture" id=7]
+[ext_resource path="res://objects/ui/selectstage/map1.png" type="Texture" id=8]
+[ext_resource path="res://objects/ui/selectstage/BG.png" type="Texture" id=9]
+[ext_resource path="res://objects/ui/selectstage/overlay.jpg" type="Texture" id=10]
+[ext_resource path="res://objects/ui/selectstage/map4.png" type="Texture" id=11]
+[ext_resource path="res://objects/ui/selectstage/invisible.png" type="Texture" id=12]
+[ext_resource path="res://sounds/sniper.mp3" type="AudioStream" id=13]
+[ext_resource path="res://Scripts/audio_die_finish.gd" type="Script" id=14]
+[ext_resource path="res://sounds/Mysterious Lights.mp3" type="AudioStream" id=15]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Animation" id=2]
+resource_name = "overlayrepeat"
+length = 30.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect/overlay2:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 15, 30 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1312.38, 780.107 ), Vector2( 1773.86, 1145.69 ), Vector2( 1312.38, 780.107 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect/overlay2:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 15, 30 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.48376, 1.48376 ), Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextureRect/overlay2:rotation_degrees")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 15, 30 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -61.8053, -137.859, -61.8053 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TextureRect/overlay:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 15, 30 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -54.7036, 86.3784 ), Vector2( -240.494, -213.283 ), Vector2( -54.7036, 86.3784 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TextureRect/overlay:rotation_degrees")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 15, 30 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 26.5869, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TextureRect/overlay:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 15, 30 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.46201, 1.46201 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends TextureButton
+
+func _ready():
+	$round1.frame = Global.scorelevel[0]
+	$round2.frame = Global.scorelevel[1]
+	$round3.frame = Global.scorelevel[2]
+	$round4.frame = Global.scorelevel[3]
+	
+func _pressed():
+	$loading.show()
+	yield(get_tree(),\"idle_frame\")
+	yield(get_tree(),\"idle_frame\")
+	
+	var audio = $AudioStreamPlayer
+	remove_child(audio)
+	Global.add_child(audio)
+	audio.play()
+	get_tree().change_scene(\"res://Levels/Level0.tscn\")
+"
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 12 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+} ]
+
+[sub_resource type="DynamicFont" id=5]
+size = 120
+use_filter = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "text"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label4:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "E", "Eliminate ALL TARGETS 
+WITH ONE BLAZING BULLET" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label3:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.375, 0.75, 1.125, 1.5, 1.875, 2.25, 2.625, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.92549, 0.439216, 1 ), Color( 1, 0.92549, 0.439216, 0.501961 ), Color( 1, 0.92549, 0.439216, 1 ), Color( 1, 0.92549, 0.439216, 0.501961 ), Color( 1, 0.92549, 0.439216, 1 ), Color( 1, 0.92549, 0.439216, 0.501961 ), Color( 1, 0.92549, 0.439216, 1 ), Color( 1, 0.92549, 0.439216, 0.501961 ), Color( 1, 0.92549, 0.439216, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=7]
+size = 120
+font_data = ExtResource( 4 )
+
+[sub_resource type="GDScript" id=8]
+resource_name = "back to main"
+script/source = "extends Button
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func _on_Button_pressed():
+	get_tree().change_scene(\"res://Levels/Intro.tscn\");
+"
+
+[node name="LevelSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="overlay" type="Sprite" parent="TextureRect"]
+modulate = Color( 1, 1, 1, 0.156863 )
+material = SubResource( 1 )
+position = Vector2( -54.7036, 86.3784 )
+texture = ExtResource( 10 )
+
+[node name="overlay2" type="Sprite" parent="TextureRect"]
+modulate = Color( 1, 1, 1, 0.156863 )
+material = SubResource( 1 )
+position = Vector2( 1312.38, 780.107 )
+rotation = -1.07871
+texture = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "overlayrepeat"
+anims/overlayrepeat = SubResource( 2 )
+
+[node name="level1" type="TextureButton" parent="."]
+anchor_left = 0.0786458
+anchor_top = 0.260185
+anchor_right = 0.243229
+anchor_bottom = 0.475
+texture_normal = ExtResource( 11 )
+texture_pressed = ExtResource( 11 )
+texture_hover = ExtResource( 11 )
+texture_disabled = ExtResource( 11 )
+texture_focused = ExtResource( 11 )
+script = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="round1" type="AnimatedSprite" parent="level1"]
+position = Vector2( 23.545, 163.545 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round2" type="AnimatedSprite" parent="level1"]
+position = Vector2( 96.703, 154.295 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round3" type="AnimatedSprite" parent="level1"]
+position = Vector2( 164.816, 146.727 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round4" type="AnimatedSprite" parent="level1"]
+position = Vector2( 235.451, 139.159 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level1"]
+stream = ExtResource( 13 )
+script = ExtResource( 14 )
+
+[node name="loading" type="Panel" parent="level1"]
+visible = false
+self_modulate = Color( 0.517647, 0.517647, 0.517647, 0.576471 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -189.0
+margin_top = -300.0
+margin_right = 1487.0
+margin_bottom = 640.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="level1/loading"]
+margin_left = 639.841
+margin_top = 494.377
+margin_right = 1569.84
+margin_bottom = 640.377
+rect_scale = Vector2( 0.802069, 0.802069 )
+custom_fonts/font = SubResource( 5 )
+text = "NOW LOADING..."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level2" type="TextureButton" parent="."]
+visible = false
+anchor_left = 0.311344
+anchor_top = 0.41816
+anchor_right = 0.474886
+anchor_bottom = 0.706123
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 7 )
+texture_disabled = ExtResource( 7 )
+texture_focused = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="round1" type="AnimatedSprite" parent="level2"]
+position = Vector2( 11.6528, 206.355 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round2" type="AnimatedSprite" parent="level2"]
+position = Vector2( 76.4023, 218.128 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round3" type="AnimatedSprite" parent="level2"]
+position = Vector2( 145.356, 228.219 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round4" type="AnimatedSprite" parent="level2"]
+position = Vector2( 210.104, 239.151 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level2"]
+stream = ExtResource( 13 )
+script = ExtResource( 14 )
+
+[node name="level3" type="TextureButton" parent="."]
+visible = false
+anchor_left = 0.534699
+anchor_top = 0.265849
+anchor_right = 0.698241
+anchor_bottom = 0.553812
+rect_pivot_offset = Vector2( -1026.62, 199.751 )
+texture_normal = ExtResource( 6 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
+texture_disabled = ExtResource( 6 )
+texture_focused = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="round1" type="AnimatedSprite" parent="level3"]
+position = Vector2( 41.8486, 235.729 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round2" type="AnimatedSprite" parent="level3"]
+position = Vector2( 106.599, 223.46 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round3" type="AnimatedSprite" parent="level3"]
+position = Vector2( 175.552, 214.46 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round4" type="AnimatedSprite" parent="level3"]
+position = Vector2( 240.301, 206.3 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level3"]
+stream = ExtResource( 13 )
+script = ExtResource( 14 )
+
+[node name="level4" type="TextureButton" parent="."]
+visible = false
+anchor_left = 0.746875
+anchor_top = 0.652778
+anchor_right = 0.910417
+anchor_bottom = 0.866667
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 8 )
+texture_disabled = ExtResource( 8 )
+texture_focused = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="round1" type="AnimatedSprite" parent="level4"]
+position = Vector2( 34.7773, 166.433 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round2" type="AnimatedSprite" parent="level4"]
+position = Vector2( 99.5273, 154.164 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round3" type="AnimatedSprite" parent="level4"]
+position = Vector2( 168.48, 145.164 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="round4" type="AnimatedSprite" parent="level4"]
+position = Vector2( 233.229, 137.003 )
+scale = Vector2( 0.0876156, 0.0876156 )
+frames = SubResource( 4 )
+speed_scale = 0.0
+centered = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="level4"]
+stream = ExtResource( 13 )
+script = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 25.0
+margin_top = 129.0
+margin_right = 804.0
+margin_bottom = 275.0
+rect_scale = Vector2( 0.802069, 0.802069 )
+custom_fonts/font = SubResource( 5 )
+text = "AREA SELECT"
+
+[node name="text" type="AnimationPlayer" parent="."]
+autoplay = "text"
+anims/text = SubResource( 6 )
+
+[node name="Label3" type="Label" parent="."]
+self_modulate = Color( 1, 0.92549, 0.439216, 1 )
+margin_left = 419.903
+margin_top = 820.811
+margin_right = 891.903
+margin_bottom = 954.811
+rect_scale = Vector2( 0.756633, 0.756633 )
+custom_colors/font_color_shadow = Color( 0.47451, 0.443137, 0.219608, 1 )
+custom_constants/shadow_offset_x = 0
+custom_constants/shadow_offset_y = 14
+custom_fonts/font = SubResource( 5 )
+text = "MISSION:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 601.841
+margin_top = 922.2
+margin_right = 2071.84
+margin_bottom = 1193.2
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 5 )
+text = "E"
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -940.0
+margin_top = -523.0
+margin_right = -310.0
+margin_bottom = -408.0
+custom_fonts/font = SubResource( 7 )
+text = "<<BACK<<"
+flat = true
+script = SubResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+autoplay = true
+
+[connection signal="finished" from="level1/AudioStreamPlayer" to="level1/AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="level2/AudioStreamPlayer" to="level2/AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="level3/AudioStreamPlayer" to="level3/AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]
+[connection signal="finished" from="level4/AudioStreamPlayer" to="level4/AudioStreamPlayer" method="_on_AudioStreamPlayer_finished"]
+[connection signal="pressed" from="Button" to="Button" method="_on_Button_pressed"]

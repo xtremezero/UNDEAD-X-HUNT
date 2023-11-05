@@ -1,0 +1,25 @@
+[remap]
+
+importer="texture_array"
+type="TextureArray"
+path="res://.import/warehouse.exr-3967eac02deb27834d24d3b7db7d90c4.texarr"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://objects/warehouse/lightmap/warehouse.exr"
+dest_files=[ "res://.import/warehouse.exr-3967eac02deb27834d24d3b7db7d90c4.texarr" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=false
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=false
+slices/horizontal=1
+slices/vertical=1

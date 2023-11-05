@@ -1,0 +1,256 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://objects/introcamera/CameraLevel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/pickups/pickups.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/warehouse/warehouse.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/hostage/hostage.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/training/hostagecard.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/skybox/sky-pano-milkyway/source/SkyPano_Milkyway.fbx" type="PackedScene" id=6]
+[ext_resource path="res://objects/sniper/gun.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sounds/Evil Incoming.mp3" type="AudioStream" id=8]
+[ext_resource path="res://objects/zombie/zombie.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/reflector/reflector.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Animation" id=1]
+resource_name = "level0Start"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 8.57418 ),
+"update": 0,
+"values": [ Vector3( 5.65849, 2.08818, -0.000501871 ), Vector3( -0.531909, 2.43759, 2.15223 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 8.57418 ),
+"update": 0,
+"values": [ Vector3( -43.993, -90, -1.64856e-06 ), Vector3( -19.0636, -75.038, -7.14376e-07 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 70.0, 48.2 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "startgame"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 1.9, 2.6 ),
+"transitions": PoolRealArray( 1, 0.0796601, 1.18921, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "level1Startn"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:translation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.645, 3.3461, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 8.57418 ),
+"update": 0,
+"values": [ Vector3( 6.9887, 1.37625, -3.53278 ), Vector3( 3.48219, 2.19084, -2.6043 ), Vector3( 1.95119, 1.39368, 0.486762 ), Vector3( 2.79582, 1.27931, 4.01698 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.645, 3.3461, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 8.57418 ),
+"update": 0,
+"values": [ Vector3( -18.1054, -160.495, 5.30674 ), Vector3( -18.4206, -132.38, 3.56082 ), Vector3( 1.3776, -102.701, 1.6627 ), Vector3( -2.9916, -75.038, -6.76119e-07 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:fov")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 70.0, 48.2 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "startgame"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CanvasLayer/ColorRect:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5, 4, 4.6 ),
+"transitions": PoolRealArray( 1, 0.0796601, 1.18921, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Spatial" type="Spatial"]
+
+[node name="gun" parent="." instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.11718, 1.75185, -0.315374 )
+currentLevel = 2
+bulletspeed = 2.0
+slowGague = 4.0
+closestzombie = NodePath("../zombie")
+hostage = NodePath("../hostage2")
+
+[node name="skulls" parent="gun/CanvasLayer/enemies/targets" index="0"]
+frame = 7
+
+[node name="skulls5" parent="gun/CanvasLayer/enemies/targets" index="4"]
+frame = 4
+
+[node name="skulls6" parent="gun/CanvasLayer/enemies/targets" index="5"]
+frame = 4
+
+[node name="win" parent="gun/CanvasLayer" index="3"]
+next = "res://Levels/Level3.tscn"
+
+[node name="Label2" parent="gun/CanvasLayer/win/bg" index="1"]
+text = "15 sec"
+
+[node name="Label3" parent="gun/CanvasLayer/win/bg" index="2"]
+text = "14 sec"
+
+[node name="Label4" parent="gun/CanvasLayer/win/bg" index="3"]
+text = "13 sec"
+
+[node name="TextureProgress" parent="gun/CanvasLayer/win/bg" index="5"]
+min_value = -16.0
+max_value = -13.0
+value = -13.0
+
+[node name="GamePad" parent="gun/CanvasLayer" index="5"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="shoot" parent="gun/CanvasLayer" index="6"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+
+[node name="slow" parent="gun/CanvasLayer" index="7"]
+visible = false
+self_modulate = Color( 1, 1, 1, 0 )
+
+[node name="SkyPano_Milkyway" parent="." instance=ExtResource( 6 )]
+transform = Transform( 3.86709, 0, 0, 0, 3.86709, 0, 0, 0, 3.86709, 0, 0, 0 )
+
+[node name="warehouse" parent="." instance=ExtResource( 3 )]
+
+[node name="DirectionalLight" parent="warehouse/WorldEnvironment" index="0"]
+transform = Transform( 0.86883, 2.16419e-08, -0.49511, 0.49511, -3.79778e-08, 0.86883, 0, -1, -4.37114e-08, -3.8802, 2.87399, -4.22662 )
+
+[node name="hostage4" parent="." instance=ExtResource( 5 )]
+transform = Transform( 0.279124, 0, -1.33353, 0, 1.36243, 0, 1.33353, 0, 0.279124, 4.95465, 0.0339324, 0.985981 )
+
+[node name="hostage3" parent="." instance=ExtResource( 5 )]
+transform = Transform( -0.236068, 0, -1.34182, 0, 1.36243, 0, 1.34182, 0, -0.236068, 4.96395, 0.0339323, 0.17206 )
+
+[node name="CameraLevel" parent="." instance=ExtResource( 1 )]
+transform = Transform( -0.928976, 0.190496, -0.317356, 0.0879083, 0.946413, 0.310765, 0.359549, 0.260795, -0.895941, 6.9887, 1.37625, -3.53278 )
+fov = 70.0
+
+[node name="AnimationPlayer" parent="CameraLevel" index="0"]
+autoplay = "level1Startn"
+anims/level0Start = SubResource( 1 )
+anims/level1Startn = SubResource( 2 )
+
+[node name="pickups" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.73708, 0.982169, 2.74375 )
+
+[node name="pickups3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6237, 0.982169, -1.23144 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+
+[node name="zombie" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6751, 0.0346711, 0.485653 )
+targetpath = NodePath("../hostage2")
+
+[node name="zombie2" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07827, 0.0346713, 4.27442 )
+targetpath = NodePath("../hostage")
+
+[node name="zombie3" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.73894, 0.0346713, -3.83559 )
+targetpath = NodePath("../hostage5")
+
+[node name="hostage" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.927667, 0, -0.373409, 0, 1, 0, 0.373409, 0, 0.927667, 4.77083, 0.402076, 3.44405 )
+
+[node name="hostage2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.927667, 0, -0.373409, 0, 1, 0, 0.373409, 0, 0.927667, 7.95361, 0.402076, 0.315548 )
+
+[node name="hostage5" parent="." instance=ExtResource( 4 )]
+transform = Transform( 0.910756, 0, 0.412946, 0, 1, 0, -0.412946, 0, 0.910756, 4.88758, 0.402076, -2.22566 )
+
+[node name="reflector" parent="." instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 11.0918, 1.27086, 3.12936 )
+
+[node name="reflector2" parent="." instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 11.0918, 1.27086, -1.07931 )
+
+[editable path="gun"]
+[editable path="warehouse"]
+[editable path="CameraLevel"]
