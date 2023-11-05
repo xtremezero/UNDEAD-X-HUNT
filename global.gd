@@ -15,10 +15,7 @@ var availablelevel = [0,0,0,0]
 
 var enemies = 0
 func _ready():
-	var date = OS.get_date()
-	
-	#if not (date.year == 2021 and ((date.month == 6 and date.day < 7) or (date.month == 5 and date.day > 20))):
-	#	get_tree().quit()
+
 	
 	#load_levels
 	pass # Replace with function body.
