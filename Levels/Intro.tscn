@@ -82,9 +82,6 @@ tracks/0/keys = {
 [node name="Node2D" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="introbg" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -93,9 +90,6 @@ margin_bottom = 35.0
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 7
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Label" type="Label" parent="introbg"]
 anchor_left = 0.105072
@@ -112,6 +106,24 @@ custom_constants/shadow_offset_x = 13
 custom_constants/shadow_offset_y = 9
 custom_fonts/font = SubResource( 1 )
 text = "UNDEAD X HUNT"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label3" type="Label" parent="introbg"]
+anchor_left = 0.734375
+anchor_top = 0.929148
+anchor_right = 0.988208
+anchor_bottom = 0.987175
+margin_right = 514.64
+margin_bottom = 69.2999
+rect_scale = Vector2( 0.486217, 0.486217 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 13
+custom_constants/shadow_offset_y = 9
+custom_fonts/font = SubResource( 1 )
+text = "#FREE_PALESTINE"
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -133,9 +145,6 @@ custom_constants/shadow_offset_x = 4
 custom_constants/shadow_offset_y = 3
 custom_fonts/font = SubResource( 2 )
 text = "XtremeZero"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Button" type="Button" parent="introbg/Label2"]
 self_modulate = Color( 1, 1, 1, 0 )
