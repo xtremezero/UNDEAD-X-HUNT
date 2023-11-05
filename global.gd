@@ -12,8 +12,8 @@ var scorelevel = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var unlockedlevel = [1,0,0,0]
 var availablelevel = [0,0,0,0]
 
-
 var enemies = 0
+
 func _ready():
 
 	
